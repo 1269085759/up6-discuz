@@ -1,0 +1,69 @@
+{block html}
+
+	<style type="text/css">
+		#e_cmd_uploader { background: url('source/plugin/httpuploader/image/flup27.png') no-repeat; !important;}
+		.b2r #e_cmd_uploader { background: url('source/plugin/httpuploader/image/flup16.png') no-repeat; !important;}
+	</style>
+	<link type="text/css" rel="stylesheet" href="source/plugin/httpuploader/css/style.css" />
+	<script type="text/javascript" src="source/plugin/httpuploader/js/tinybox.js"></script>
+	<div id="uploaderDiv" style="display:none;"><iframe id="ifrUploader" width="425" height="470" frameborder="0"></iframe></div>
+	<script type="text/javascript">
+		var uploaderInited = false;
+		(function()
+		{
+			var btn = $(editorid + '_attach');
+
+			if (!btn || !btn.parentNode)
+			{
+				return;
+			} 
+			else if (btn.parentNode.className != 'b1r')
+			{
+				return;
+			}
+
+			var obj = document.createElement('a');
+			obj.id = 'e_cmd_uploader';
+			obj.title = '{lang httpuploader:title}';
+			obj.href = 'javascript: ;';
+			obj.appendChild(document.createTextNode('{lang httpuploader:text}'));
+			btn.parentNode.appendChild(obj);
+
+			//插件执行完毕后事件
+			window.InsertFile = function(fileName,fileUrl)
+			{
+				if (wysiwyg)
+				{
+					insertText('<a href="' + fileUrl + '">' + fileName + '</a><br/>',0,0,false);
+				}
+				else
+				{
+					insertText('[url]' + fileUrl + '[/url]',0,0,false);
+				}
+			};
+
+			var _discuzcode = window.discuzcode;
+			//点击编辑器中插件按钮事件
+			window.discuzcode = function(cmd, arg)
+			{
+				if (cmd == 'cmd_uploader')
+				{	
+					if(!uploaderInited)
+					{
+						var ifr = document.getElementById("ifrUploader");
+						ifr.src = "source/plugin/httpuploader/template/index.htm";
+						uploaderInited = true;
+					}
+					var div = document.getElementById("uploaderDiv");
+					TINY.box.show(div.innerHTML,0,0,0,0)
+				} else
+				{
+					_discuzcode(cmd, arg);
+				}
+			};
+
+		})();
+
+	</script>
+
+{/block}

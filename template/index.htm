@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>上传超大附件</title>
+    <link href="../css/HttpUploader.css" type="text/css" rel="Stylesheet"/>
+    <script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="../js/HttpUploader.js" charset="utf-8" ></script>
+    <script language="javascript" type="text/javascript">
+		
+		var cbMgr = new HttpUploaderMgr();
+    	//cbMgr.Fields["uid"] = 0;
+
+    	$(document).ready(function()
+    	{
+    		cbMgr.LoadTo("FilePanel");
+    		cbMgr.Init();
+        	//cbMgr.SetupCheck();//安装检查
+        	cbMgr.UpdateCheck(); //安装检查
+        });
+    </script>
+</head>
+<body>
+	<div id="FilePanel"></div>
+</body>
+</html>

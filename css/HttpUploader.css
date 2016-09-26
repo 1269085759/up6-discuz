@@ -1,0 +1,87 @@
+﻿body{ font:12px/12px 宋体,新宋体; color:#333333; margin:0; padding:5px;}
+li{ list-style:none; }
+a{ text-decoration:none; color:#004477; }
+a:hover{ color:#004477; text-decoration:underline; }
+
+/*文件列表框*/
+#FilePostLister
+{
+    border: 1px solid #6FBCE2;
+    background-color: #FFFFFF;
+    font:12px/12px 宋体,新宋体;/*防目外部样式破坏*/
+    width: 411px;
+    height:300px;
+    overflow-x:hidden;
+    overflow-y:scroll;
+}
+/*细线*/
+.Line{background-color: #E3E6EB;overflow: hidden;display: none;height: 1px;}
+/*新构架*/
+div.UploaderItem{font-family: 新宋体;font-size: 12px; background-color: #FFFFFF;width: 374px; height:65px; margin:5px 10px 0 20px; display:none; }
+div.top-space{margin:3px 0 0 0;}
+div.lineSpace{margin:10px 0 0 0;}
+div.UploaderItemLeft{width:315px; float:left;}
+div.UploaderItemRight{width:54px; float:left;margin:3px 0 0 0;}
+/*文件信息*/
+.FileInfo{margin:3px 0 0 0;padding:0;}
+/*文件名称*/
+div.UploaderItem .FileName{ float:left; font-weight: bold; overflow:hidden; width:239px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+/*文件大小*/
+div.UploaderItem .FileSize{padding:0;color:#728089;width:52px; float:left;text-align:right;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+/*进度条边框*/
+div.UploaderItem div.ProcessBorder{margin:25px 0 0 0;padding: 0px;border: 1px solid #AAAAAA;width:284px; clear:both; }
+div.UploaderItem div.Process{ height:12px; background-color: #A5DF16;width:0;/*width:200px;*/}
+/*上传信息*/
+div.UploaderItem div.PostInf{color: #7A8F99;margin:8px 0 0 0;}
+/*进度百分比*/
+div.UploaderItem div.ProcessNum{font:12px/12px 宋体;margin:10px 0 0 0;}
+/*按钮*/
+div.UploaderItem span.Btn,div.UploaderItem span.Btn:hover{text-decoration: none; color:#244281;cursor:hand;}
+.hide{display:none;}
+.BtnInfo{height:12px;}
+/*上传面板*/
+#UploaderPanel{font:12px/12px 宋体; background:#ECF9FF; border:solid 1px #4CA5D8;width:426px;}
+#UploaderPanel .header{ height:31px; line-height:31px; background:#67B9DC; border-bottom:solid 1px #FFF; color:White;padding:0 0 0 10px; font-weight:bold;}
+#UploaderPanel .toolbar{padding:20px 0 0 0;}
+#UploaderPanel .toolbar input{margin:0 0 0 7px;}
+#UploaderPanel .content{margin:17px 7px 15px 7px; background:#ECF9FF;}
+#UploaderPanel .footer{height:25px; line-height:25px; background:#D4EDF9; color:#7A8F99; border-top:solid 1px #B7DDF0;padding:5px;}
+/*单文件上传面板*/
+#UpPanel{background:#ECF9FF; border:solid 1px #4CA5D8;width:300px;}
+#UpPanel a{color:#004477; text-decoration:none;margin:0 0 0 10px;}
+#UpPanel a.btn{ cursor:hand;}
+#UpPanel #UpBtnStop{display:none;}
+#UpPanel a.msg{color:#004477; text-decoration:none;}
+#UpPanel a.msg:hover{text-decoration:none;}
+#UpPanel a:hover{color:#004477; text-decoration:underline;}
+/*文件列表*/
+div.FileListerBox{border:solid 1px #A6CAF0;width:402px; background:#fff;}
+.ulFileHead{margin:0;padding:0; list-style-type:none;background:#F1F1F1;width:402px;height:25px; border-bottom:solid 1px #C1C8D2;}
+.ulFileHead li{ height:25px; float:left; background:#F1F1F1;font:12px/12px 宋体; line-height:25px; vertical-align:middle;}
+.ulFileHead li.hcb{width:25px; border-right:solid 1px #C6C9CA; text-align:center; vertical-align:middle;}
+.ulFileHead li.hname{width:164px;padding:0 0 0 5px;border-right:solid 1px #C6C9CA; border-left:solid 1px #FDFEFE;}
+.ulFileHead li.hsize{width:50px;padding:0 5px 0 0;text-align:right;border-right:solid 1px #C6C9CA;border-left:solid 1px #FDFEFE;}
+.ulFileHead li.hper{width:40px;padding:0 5px 0 0; text-align:right;border-right:solid 1px #C6C9CA;border-left:solid 1px #FDFEFE;}
+.ulFileHead li.hop{width:71px;text-align:right;padding:0 5px 0 0;}
+/*列表项*/
+.FileItems{overflow-x:hidden;overflow-y:scroll;height:350px;}
+.FileItems ul{margin:0;padding:0; list-style-type:none;}
+.FileItems ul li{ height:25px; float:left; font:12px/25px 宋体; text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+.FileItems ul li.fcb{width:25px; text-align:center;vertical-align:middle;}
+.FileItems ul li.fname{width:164px;padding:0 0 0 5px;}
+.FileItems ul li.fsize{width:53px;text-align:right;}
+.FileItems ul li.fper{width:45px;text-align:right;}
+.FileItems ul li.fop{width:70px;text-align:right;padding:0 5px 0 0;}
+.FileItems ul li.fop span{ color:#244281; font:12px/25px 新宋体; cursor:hand; }
+.divHidden{ display:none;}
+/*组合框*/
+.combinBox{width:436px; height:454px;border: 1px solid #cbcbcb; background-color: #f2f6fb; }
+.cbHeader{width: 436px;height:28px; list-style-type:none;padding:0;margin:0;border-bottom:solid 1px #ABC0DB;}
+.cbHeader li{float: left; width:132px;height:27px;font:12px/28px 宋体; text-align: center; cursor:pointer; background: #D6E2F1; border:solid 1px #ABC0DB;}
+.cbHeader li.hover{ background: #f2f6fb; border:solid 1px #ABC0DB; border-bottom:solid 1px #F2F6FB;}
+/*标签控件样式*/ 
+.cbBody{ padding:5px;}
+.cbBody ul{ list-style-type:none;margin:0;padding:0;}
+.cbBody ul.cbItem{ display:none;list-style-type:none;margin:0;padding:0;}
+.cbBody ul li{}
+.cbBody ul.block{ display: block;}
