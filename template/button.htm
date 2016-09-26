@@ -1,11 +1,11 @@
 {block html}
 
 	<style type="text/css">
-		#e_cmd_uploader { background: url('source/plugin/httpuploader/image/flup27.png') no-repeat; !important;}
-		.b2r #e_cmd_uploader { background: url('source/plugin/httpuploader/image/flup16.png') no-repeat; !important;}
+		#e_cmd_uploader { background: url('source/plugin/up6/image/flup27.png') no-repeat; !important;}
+		.b2r #e_cmd_uploader { background: url('source/plugin/up6/image/flup16.png') no-repeat; !important;}
 	</style>
-	<link type="text/css" rel="stylesheet" href="source/plugin/httpuploader/css/style.css" />
-	<script type="text/javascript" src="source/plugin/httpuploader/js/tinybox.js"></script>
+	<link type="text/css" rel="stylesheet" href="source/plugin/up6/js/style.css" />
+	<script type="text/javascript" src="source/plugin/up6/js/tinybox.js"></script>
 	<div id="uploaderDiv" style="display:none;"><iframe id="ifrUploader" width="425" height="470" frameborder="0"></iframe></div>
 	<script type="text/javascript">
 		var uploaderInited = false;
@@ -51,7 +51,7 @@
 					if(!uploaderInited)
 					{
 						var ifr = document.getElementById("ifrUploader");
-						ifr.src = "source/plugin/httpuploader/template/index.htm";
+						ifr.src = "source/plugin/up6/template/index.htm";
 						uploaderInited = true;
 					}
 					var div = document.getElementById("uploaderDiv");
