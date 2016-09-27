@@ -12,6 +12,14 @@ if(!defined('IN_DISCUZ')) {
 
 $sql = <<<EOF
 
+DROP TABLE IF EXISTS up6_files;
+DROP PROCEDURE IF EXISTS f_process;
+DROP PROCEDURE IF EXISTS fd_process;
+DROP TABLE IF EXISTS up6_folders;
+DROP PROCEDURE IF EXISTS fd_files_add_batch;
+DROP PROCEDURE IF EXISTS fd_update;
+DROP PROCEDURE IF EXISTS f_update;
+
 CREATE TABLE IF NOT EXISTS `up6_files` (
   `f_id` 				int(11) NOT NULL auto_increment,
   `f_pid` 				int(11) default '0',		
@@ -37,23 +45,26 @@ CREATE TABLE IF NOT EXISTS `up6_files` (
   PRIMARY KEY  (`f_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
---更新文件进度
-DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `f_process`(in posSvr bigint(19),in lenSvr bigint(19),in perSvr varchar(6),in uidSvr int,in fidSvr int,in complete tinyint)
-update up6_files set f_pos=posSvr,f_lenSvr=lenSvr,f_perSvr=perSvr,f_complete=complete where f_uid=uidSvr and f_id=fidSvr
-end$$
+/*--更新文件进度*/
+CREATE PROCEDURE f_process(
+in `posSvr` bigint(19),
+in `lenSvr` bigint(19),
+in `perSvr` varchar(6),
+in `uidSvr` int,
+in `fidSvr` int,
+in `complete` tinyint)
+update up6_files set f_pos=posSvr,f_lenSvr=lenSvr,f_perSvr=perSvr,f_complete=complete where f_uid=uidSvr and f_id=fidSvr;
 
---更新文件夹进度
-DROP PROCEDURE `fd_process`
+/*更新文件夹进度*/
+CREATE PROCEDURE fd_process(
+in uidSvr int,
+in fd_idSvr int,
+in fd_lenSvr bigint(19),
+in perSvr varchar(6))
+update up6_files set f_lenSvr=fd_lenSvr ,f_perSvr=perSvr  where f_uid=uidSvr and f_id=fd_idSvr;
 
-DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `fd_process`(in uidSvr int,in fd_idSvr int,in fd_lenSvr bigint(19),in perSvr varchar(6))
-update up6_files set f_lenSvr=fd_lenSvr ,f_perSvr=perSvr  where f_uid=uidSvr and f_id=fd_idSvr
-end$$
-
---文件夹表
-DROP TABLE IF EXISTS `up6_folders`;
-CREATE TABLE IF NOT EXISTS `up6_folders` (
+/*文件夹表*/
+CREATE TABLE IF NOT EXISTS up6_folders (
   `fd_id` 				int(11) NOT NULL auto_increment,
   `fd_name` 			varchar(50) default '',
   `fd_pid` 				int(11) default '0',
@@ -74,8 +85,7 @@ CREATE TABLE IF NOT EXISTS `up6_folders` (
   PRIMARY KEY  (`fd_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
---文件夹初始化
-DROP PROCEDURE `fd_files_add_batch`
+/*文件夹初始化*/
 DELIMITER $$
 CREATE PROCEDURE fd_files_add_batch(
  in fCount int	
@@ -84,8 +94,7 @@ begin
 	declare ids_f text default '0';
 	declare ids_fd text default '0';
 	declare i int;
-	set i = 0;
-	
+	set i = 0;	
 	
 	while(i<fdCount) do	
 		insert into up6_folders(fd_pid) values(0);	
@@ -104,11 +113,11 @@ begin
 	
 	select ids_f,ids_fd;
 end$$
+DELIMITER ;
 	
---文件夹更新
-DROP PROCEDURE `fd_update`
+/*文件夹更新*/
 DELIMITER $$
-CREATE PROCEDURE fd_update(		
+CREATE PROCEDURE fd_update(
  in _name			varchar(50)
 ,in _pid			int
 ,in _uid			int
@@ -144,10 +153,9 @@ begin
 	where 
 	fd_id = _id;
 end$$
+DELIMITER ;
 
---文件更新
-DROP PROCEDURE `f_update`
-
+/*文件更新*/
 DELIMITER $$
 CREATE PROCEDURE f_update(
  in _pid		int
@@ -188,6 +196,8 @@ begin
 	,f_complete	= _complete
 	where f_id = _id;
 end$$
+DELIMITER ;
+select f_id from up6_files limit 0,1;
 
 EOF;
 
