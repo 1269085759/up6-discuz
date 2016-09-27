@@ -350,9 +350,11 @@ function HttpUploaderMgr()
         if(this.firefox||this.chrome) com += '<embed name="parter" type="' + this.Config.firefox.type + '" pluginspage="' + this.Config.firefox.path + '" width="1" height="1"/>';
 	    //acx += '<div style="display:none">';
 	    //拖拽组件
+		/*
         com += '<object name="droper" classid="clsid:' + this.Config.ie.drop.clsid + '"';
         com += ' codebase="' + this.Config.ie.path + '#version=' + this.Config.Version + '" width="192" height="192" >';
         com += '</object>';
+		*/
 	    //文件夹选择控件
         com += '<object name="parter" classid="clsid:' + this.Config.ie.part.clsid + '"';
 	    com += ' codebase="' + this.Config.ie.path + '#version=' + this.Config.Version + '" width="1" height="1" ></object>';
