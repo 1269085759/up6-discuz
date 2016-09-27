@@ -113,7 +113,7 @@ function HttpUploaderMgr()
         , chrome45: { name: "com.xproer.up6", path: "http://www.ncmem.com/download/up6.2/up6.nat.crx" }
         , exe: { path: "http://www.ncmem.com/download/up6.2/up6.exe" }
 		, "SetupPath": "http://localhost:4955/demoAccess/js/setup.htm"
-        , "Fields": {"uname": "test","upass": "test","uid":"0","fid":"0"}
+        , "Fields": {"uname": "test","upass": "test","uid":window.parent.discuz_uid,"fid":"0"}
 	};
 
     //biz event
@@ -242,10 +242,13 @@ function HttpUploaderMgr()
 
             if (fileSvr.complete)
             {
-                liOp.html('<span fid="' + idSvr + '">删除</span>').css("cursor", "pointer").click(function ()
+                liOp.html('<a name="insert" title="添加到编辑器">插入</a><span fid="' + idSvr + '">删除</span>').css("cursor", "pointer").click(function ()
                 {
                     ref.RemoveFile(fileSvr);
-                });
+                }).find("a[name='insert']").click(function(){//dz:添加到编辑器
+						var down_url = _this.Config.SiteUrl + "source/plugin/httpuploader/db/FileDown.php?fid=" + idSvr;
+						window.parent.InsertFile(fileSvr.nameLoc,url);
+					});
             }
             else
             {

@@ -38,6 +38,11 @@ function FileUploader(fileLoc, mgr)
         , deleted: false
     };//json obj，服务器文件信息
     this.fileSvr = jQuery.extend(this.fileSvr, fileLoc);
+	//for dz	
+	this.PG = function(id){return window.parent.document.getElementById(id);};
+	this.PGC = function(name){return window.parent.document.createElement(name);};
+	this.PJQ = $(window.parent.document.body);
+	this.PGT = function(txt){return window.parent.document.createTextNode(txt);};
 
     //准备
     this.Ready = function ()
@@ -92,6 +97,54 @@ function FileUploader(fileLoc, mgr)
         var str = json.lenPost + " " + json.speed + " " + json.time;
         this.ui.msg.text(str);
     };
+	
+	//aid:dz附件表ID
+	this.add_to_dz = function(aid)
+	{
+		var attachNtc = this.PG("attachnotice_attach");		
+		attachNtc.style.display = "block";
+		
+		var attachCt = this.PG("unusednum_attach");//未使用附件总数对象
+		var count = 0;
+		if(attachCt.innerText.length > 0)
+		{
+			count = parseInt(attachCt.innerText);
+		}
+		++count;
+		attachCt.innerText = count;//总数加一
+		
+		var attach = this.PG("unusedlist_attach");//附件列表
+		var divc = attach.getElementsByTagName("div");
+		var div = null;
+		//没有元素
+		if(divc.length == 0)
+		{
+			div = this.PGC("div");
+			div.className = "cl";
+			attach.appendChild(div);
+		}
+		else
+		{
+			div = divc[0];
+		}
+		var p = this.PGC("p");
+		var lb = this.PGC("label");
+		var span = this.PGC("span");
+		span.title = this.fileSvr.nameLoc;
+		var txt = this.PGT(this.fileSvr.nameLoc);
+		
+		div.appendChild(p);
+		p.appendChild(lb);
+		//lb.appendChild(input);
+		$(lb).append('<input class="pc" name="unused[]" type="checkbox" checked="true" id="unused'+this.aid +'" value="'+this.aid+'"/>')
+		lb.appendChild(span);
+		span.appendChild(txt);
+		
+		//更新父窗口附件相关的信息
+		window.parent.ATTACHNUM['attachunused'] += 1;
+		window.parent.updateattachnum('attach');
+	};
+	
     this.post_complete = function (json)
     {
         this.fileSvr.perSvr = "100%";
@@ -110,7 +163,8 @@ function FileUploader(fileLoc, mgr)
         //从未上传列表中删除
         this.Manager.RemoveQueueWait(this.idLoc);
 
-        var param = { md5: this.fileSvr.md5, uid: this.uid, idSvr: this.fileSvr.idSvr, time: new Date().getTime() };
+        var f_svr = encodeURIComponent( JSON.stringify(this.fileSvr));
+        var param = { md5: this.fileSvr.md5, uid: this.uid, idSvr: this.fileSvr.idSvr,fileInf:f_svr,quick:0, time: new Date().getTime() };
 
         $.ajax({
             type: "GET"
@@ -122,6 +176,7 @@ function FileUploader(fileLoc, mgr)
 			{
 			    _this.event.fileComplete(_this);//触发事件
 			    _this.FileListMgr.UploadComplete(_this.fileSvr);//添加到服务器文件列表
+				_this.add_to_dz(msg.aid);
 			    _this.post_next();
 			}
 			, error: function (req, txt, err) { alert("文件-向服务器发送Complete信息错误！" + req.responseText); }
@@ -142,10 +197,31 @@ function FileUploader(fileLoc, mgr)
         this.Manager.RemoveQueuePost(this.idLoc);
         //从未上传列表中删除
         this.Manager.RemoveQueueWait(this.idLoc);
+		
+		var f_svr = encodeURIComponent( JSON.stringify(this.fileSvr));
+        var param = { md5: this.fileSvr.md5, uid: this.uid, idSvr: this.fileSvr.idSvr,fileInf:f_svr,quick:1, time: new Date().getTime() };
+
+        $.ajax({
+            type: "GET"
+			, dataType: 'jsonp'
+			, jsonp: "callback" //自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名
+			, url: _this.Config["UrlComplete"]
+			, data: param
+			, success: function (msg)
+			{
+			    _this.event.fileComplete(_this);//触发事件
+			    _this.FileListMgr.UploadComplete(_this.fileSvr);//添加到服务器文件列表
+				_this.add_to_dz(msg.aid);
+			    _this.post_next();
+			}
+			, error: function (req, txt, err) { alert("文件-向服务器发送Complete信息错误！" + req.responseText); }
+			, complete: function (req, sta) { req = null; }
+        });
+		
         //添加到文件列表
-        this.FileListMgr.UploadComplete(this.fileSvr);
-        this.post_next();
-        this.event.fileComplete(this);//触发事件
+        //this.FileListMgr.UploadComplete(this.fileSvr);
+        //this.post_next();
+        //this.event.fileComplete(this);//触发事件
     };
     this.post_error = function (json)
     {

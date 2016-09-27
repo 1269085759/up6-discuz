@@ -10,21 +10,35 @@ header('Content-Type: text/html;charset=utf-8');
 require('DbHelper.php');
 require('DBFile.php');
 require('DBFolder.php');
+require('dz_attachment_db.php');
 
 $md5 		= $_GET["md5"];
 $uid 		= $_GET["uid"];
 $fid 		= $_GET["idSvr"];
+$fileSvr	= $_GET["fileInf"];//json字段,url编码
+$quick		= $_GET["quick"];//快速上传？
+$fileSvr	= urldecode($fileSvr);
+$fileArr	= json_decode($fileSvr,true);//解析成数组
 $fd_idSvr	= "";
 if(!empty($fd_idSvr)) $fd_idSvr = $_GET["fd_idSvr"];
 $cbk 		= $_GET["callback"];
-$ret 		= $cbk . "(0)";
+$ret 		= $cbk . "({\"aid\":0})";
 
 //md5和uid不能为空
 if ( strlen($md5) > 0 )
 {
-	$db = new DBFile();
-	$db->Complete($md5);
-	$ret = $cbk . "(1)";
+	//不是快速上传
+	if($quick=="0")
+	{
+		$db = new DBFile();
+		$db->Complete($md5);
+	}
+	
+	//添加到dz数据表
+	$aid = InsertToAttachmentDB($uid);
+	//添加到dz附件表(未使用)
+	addToAttachmentDbUnused($uid,$fid,$fileArr);
+	$ret = $cbk . "({\"aid\":$aid})";
 }
 
 //更新文件夹已上传文件数

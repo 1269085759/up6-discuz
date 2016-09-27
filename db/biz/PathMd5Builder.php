@@ -16,9 +16,8 @@ class PathMd5Builder extends PathBuilder
 		if(!is_dir($path)) mkdir($path,0777,true);
 		$path = realpath($path);//规范化路径
 		$path = PathTool::combin($path, $md5);
-		$part = pathinfo ($nameLoc);
 		$path .= ".";
-		$path .= $part["extension"];//exe,zip
+		$path .= "attach";//增强安全性，防止用户上传php脚本
 		return $path;
 	}
 }

@@ -7,19 +7,18 @@ ob_start();
 */
 require('FileDown.class.php');
 require('DbHelper.php');
+require('DBFile.php');
+require('xdb_files.php');
 
 $fid = $_GET["fid"];
 
 if( strlen($fid) >0)
 {
-	$db = new DbHelper();
-	$inf = $db->GetFileInfByFid($fid);
-	//本地文件名称
-	$name = urldecode($inf["FileNameLocal"]);
-	//服务器文件绝对路径
-	$path = urldecode($inf["FilePathRemote"]);
-	
-	dl_file_resume($path,iconv("UTF-8","GB2312",$name));
+	$db = new DBFile();
+	$fileSvr = new xdb_files();
+	if($db->GetFileInfByFid($fid,&$fileSvr) )
+	{		
+		dl_file_resume($fileSvr->pathSvr,iconv("UTF-8","GB2312",$fileSvr->nameLoc));
+	}	
 }
-
 ?>

@@ -365,7 +365,7 @@ class DBFile
 		$sb = $sb . " from up6_files where f_id=:f_id limit 0,1";
 		
 		$db = new DbHelper();
-		$cmd =& $db->prepare_utf8($sb);
+		$cmd = $db->prepare_utf8($sb);
 		$cmd->bindParam(":f_id",$f_id);
 		$row = $db->ExecuteRow($cmd);
 

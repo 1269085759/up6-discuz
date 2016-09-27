@@ -8,14 +8,14 @@ header('Content-Type: text/html;charset=utf-8');
 	更新记录：
 		2012-4-6 创建。
 */
-require('UploaderDB.php');
+require('DbHelper.php');
 require('dz_attachment_db.php');
 
 $md5 = $_GET["md5"];
 $uid = $_GET["uid"];
 $fid = $_GET["fid"];
-$callback = $_GET["callback"];
-$ret = $callback . "(0)";
+$cbk = $_GET["callback"];
+$ret = $cbk . "({\"aid\":0})";
 $aid = 0;
 
 //md5和uid不能为空
@@ -31,6 +31,6 @@ if ( strlen($fid) > 0
 }
 
 //返回查询结果
-echo $callback ."(" . $aid . ")";//客户端需要aid
+echo $cbk ."(" . $aid . ")";//客户端需要aid
 header('Content-Length: ' . ob_get_length());
 ?>

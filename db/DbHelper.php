@@ -187,7 +187,7 @@ class DbHelper
 		{
 			$cmd = $con->prepare("call $sql($param)");
 			$cmd->execute();
-			$outVal = $con->query("select $param")->fetch(PDO::FETCH_ASSOC);			
+			$outVal = $con->query("select $param")->fetch(PDO::FETCH_ASSOC);
 		}
 		catch (PDOException $e) 
 		{

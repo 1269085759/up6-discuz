@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <item id="Title"><![CDATA[Discuz! Plugin]]></item>
   <item id="Version"><![CDATA[X2]]></item>
@@ -8,12 +8,12 @@
     <item id="plugin">
       <item id="available"><![CDATA[1]]></item>
       <item id="adminid"><![CDATA[1]]></item>
-      <item id="name"><![CDATA[超大附件上传控件]]></item>
-      <item id="identifier"><![CDATA[httpuploader]]></item>
+      <item id="name"><![CDATA[大文件上传插件]]></item>
+      <item id="identifier"><![CDATA[up6]]></item>
       <item id="description"><![CDATA[]]></item>
       <item id="datatables"><![CDATA[]]></item>
-      <item id="directory"><![CDATA[httpuploader]]></item>
-      <item id="copyright"><![CDATA[(C) 2010-2012 Xproer]]></item>
+      <item id="directory"><![CDATA[up6]]></item>
+      <item id="copyright"><![CDATA[(C) 2010-2016 荆门泽优软件有限公司]]></item>
       <item id="version"><![CDATA[1.00]]></item>
       <item id="__modules">
         <item id="0">
@@ -33,8 +33,8 @@
     <item id="version"><![CDATA[X2]]></item>
     <item id="language">
       <item id="templatelang">
-        <item id="title"><![CDATA[上传超大附件]]></item>
-        <item id="text"><![CDATA[大附件上传]]></item>
+        <item id="title"><![CDATA[大文件上传插件]]></item>
+        <item id="text"><![CDATA[大文件上传插件]]></item>
         <item id="filename"><![CDATA[文件名称]]></item>
         <item id="downurl"><![CDATA[下载地址]]></item>
       </item>
