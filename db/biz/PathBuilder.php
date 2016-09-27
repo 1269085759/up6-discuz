@@ -21,7 +21,7 @@ class PathBuilder
 		//$path = getcwd();// D:\wamp\www\HttpUploader6.1
 		$path = $this->getRootDz();		
 		$path = realpath($path);//规范化路径 up6.1/upload/
-		$path = PathTool::combin($path, "upload");
+		//$path = PathTool::combin($path, "upload");
 		if(!is_dir($path) ) mkdir($path);//创建目录
 		return realpath($path);//与操作系统保持一致
 	}
