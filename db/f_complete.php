@@ -37,7 +37,7 @@ if ( strlen($md5) > 0 )
 	//添加到dz数据表
 	$aid = InsertToAttachmentDB($uid);
 	//添加到dz附件表(未使用)
-	addToAttachmentDbUnused($uid,$fid,$fileArr);
+	addToAttachmentDbUnused($uid,$aid,$fileArr);
 	$ret = $cbk . "({\"aid\":$aid})";
 }
 
