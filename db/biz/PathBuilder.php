@@ -17,7 +17,7 @@ class PathBuilder
 		示例：D:\wamp\www\HttpUploader6.1\upload\
 	*/
 	function getRoot()
-	{		
+	{
 		//$path = getcwd();// D:\wamp\www\HttpUploader6.1
 		$path = $this->getRootDz();		
 		$path = realpath($path);//规范化路径 up6.1/upload/
@@ -28,9 +28,10 @@ class PathBuilder
 	
 	function getRootDz()
 	{
-		$file_path = dirname(__FILE__);
-		$file_url  = $_SERVER["PHP_SELF"];
-		$file_path 	= str_replace("\\", "/", $file_path);//转换路径，支持Linux
+		$file_path = dirname(__FILE__);//D:\wamp\www\dz2.5_utf8\source\plugin\up6\db\biz
+		$file_path .= "\\..\\..\\..\\..\\data\\attachment\\forum\\";
+		//$file_url  = $_SERVER["PHP_SELF"];///dz2.5_utf8/source/plugin/up6/db/test.php
+		//$file_path 	= str_replace("\\", "/", $file_path);//转换路径，支持Linux
 		return realpath($file_path . "/../../../../data/attachment/forum/");
 	}
 	
