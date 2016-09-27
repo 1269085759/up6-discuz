@@ -17,30 +17,28 @@ function InsertToAttachmentDB($uid)
 	$inf = array("aid"=>0
 				 ,"tid"=>0
 				 ,"pid"=>0
-				 ,"uid"=>intval($uid)
-				 ,"tableid"=>127
-				 ,"downloads"=>0);
-	$sql = "insert into pre_forum_attachment(tid,pid,uid,tableid,downloads) values(?,?,?,?,?)";
+				 ,"tableid"=>127);
+	$sql = "insert into pre_forum_attachment(";
+	$sql = $sql . " tid";
+	$sql = $sql . ",pid";
+	$sql = $sql . ",uid";
+	$sql = $sql . ",tableid";
+	$sql = $sql . ",downloads";
+	$sql = $sql . ") values(";
+	$sql = $sql . " :tid";
+	$sql = $sql . ",:pid";
+	$sql = $sql . ",:uid";
+	$sql = $sql . ",:tableid";
+	$sql = $sql . ",0)";
+	
 	$db = new DbHelper();
-	$con = $db->GetCon();
 	if($cmd = $db->prepare($sql))
 	{
-		$cmd->bind_param("iiiii"
-						 ,$inf["tid"]
-						 ,$inf["pid"]
-						 ,$inf["uid"]
-						 ,$inf["tableid"]
-						 ,$inf["downloads"]);
-		//$stmt->execute();
-		//$stmt->close();
-		$f_id = $db->ExecuteGenKey($cmd,"tid");
-		
-		//获取新插入的ID
-		//$sql = "SELECT LAST_INSERT_ID()";
-		//$result = $con->query($sql);
-		//$row = $result->fetch_array(MYSQLI_NUM);
-		//$inf["aid"] = $f_id;
-		//$result->close();
+		$cmd->bindParam(":tid",$inf["tid"]);
+		$cmd->bindParam(":pid",$inf["pid"]);
+		$cmd->bindParam(":uid",$uid);
+		$cmd->bindParam(":tableid",$inf["tableid"]);
+		$f_id = $db->execGenKey($cmd);
 	}
 	return $f_id;
 }
@@ -57,23 +55,45 @@ function InsertToAttachmentDB($uid)
 function addToAttachmentDbUnused($uid,$aid,$fileArr)
 {			
 	//添加到pre_forum_attachment_unused表
-	$sql = "insert into pre_forum_attachment_unused(aid,uid,dateline,filename,filesize,attachment,remote,isimage,width,thumb) values(?,?,?,?,?,?,?,?,?,?)";
+	$sql = "insert into pre_forum_attachment_unused(";
+	$sql = $sql . " aid";
+	$sql = $sql . ",uid";
+	$sql = $sql . ",dateline";
+	$sql = $sql . ",filename";
+	$sql = $sql . ",filesize";
+	$sql = $sql . ",attachment";
+	$sql = $sql . ",remote";
+	$sql = $sql . ",isimage";
+	$sql = $sql . ",width";
+	$sql = $sql . ",thumb";
+	
+	$sql = $sql . ") values(";
+	
+	$sql = $sql . " :aid";
+	$sql = $sql . ",:uid";
+	$sql = $sql . ",:dateline";
+	$sql = $sql . ",:filename";
+	$sql = $sql . ",:filesize";
+	$sql = $sql . ",:attachment";
+	$sql = $sql . ",:remote";
+	$sql = $sql . ",:isimage";
+	$sql = $sql . ",:width";
+	$sql = $sql . ",:thumb)";
+	
 	$db = new DbHelper();
-	$cmd = $db->GetConUtf8($sql);
+	$cmd = $db->prepare_utf8($sql);
 	$z = 0;
-	$cmd->bind_param("iiisisiiii"
-					  ,$aid
-					  ,$uid
-					  ,time()
-					  ,$fileArr["nameLoc"]
-					  ,$fileArr["lenLoc"]
-					  ,$fileArr["pathRel"]
-					  ,$z
-					  ,$z
-					  ,$z
-					  ,$z);
-	$cmd->execute();
-	$cmd->close();
+	$cmd->bindParam(":aid",$aid);
+	$cmd->bindParam(":uid",$uid);
+	$cmd->bindParam(":dateline",time());
+	$cmd->bindParam(":filename",$fileArr["nameLoc"]);
+	$cmd->bindParam(":filesize",$fileArr["lenLoc"]);
+	$cmd->bindParam(":attachment",$fileArr["pathRel"]);//dz上传路径：201609/27/160517nfyj5atjvev5ak08.png
+	$cmd->bindParam(":remote",$z);
+	$cmd->bindParam(":isimage",$z);
+	$cmd->bindParam(":width",$z);
+	$cmd->bindParam(":thumb",$z);
+	$db->ExecuteNonQuery($cmd);
 	
 }
 ?>

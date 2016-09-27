@@ -19,7 +19,7 @@ class DbHelper
 	function __construct() 
 	{
         $this->m_host 	= "localhost";  //
-		$this->m_dbName = "HttpUploader6";
+		$this->m_dbName = "dz2x_utf8";
 		$this->m_uname	= "root";
 		$this->m_upass	= "";
 		$this->m_dbStr = "mysql:host=" . $this->m_host . ";dbname=" . $this->m_dbName;		
@@ -114,6 +114,22 @@ class DbHelper
 		{
 			$cmd->execute();
 			$key = $this->m_conCur->lastInsertId($key_name);			
+		}
+		catch(PDOException $e)
+		{
+			print "Error!:" . $e->getMessage() . "<br/>";
+			die();
+		}
+		return $key;
+	}
+	
+	function execGenKey(&$cmd)
+	{
+		$key = null;
+		try
+		{
+			$cmd->execute();
+			$key = $this->m_conCur->lastInsertId();
 		}
 		catch(PDOException $e)
 		{

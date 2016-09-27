@@ -777,7 +777,10 @@ function HttpUploaderMgr()
 	    var post_body       = dom.find("div[name='post_body']");
         var post_head       = dom.find('div[name="post_head"]');
         var post_foot       = dom.find('div[name="post_footer"]');
-        post_body.height(post_panel.height() - post_head.height() - post_foot.outerHeight());
+		var post_panel_height = 426;
+		var post_head_height = 43;
+		var post_foot_height = 35;
+        post_body.height(post_panel_height - post_head_height - post_foot_height);
 
 	    this.filesUI        = post_body;
 	    this.tmpFile        = panel.find('div[name="fileItem"]');
