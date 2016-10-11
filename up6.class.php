@@ -24,7 +24,7 @@ class plugin_up6
 	
 	public function global_footer(){
 		global $_G;
-		include template('up6:tabcss');
+		include template('up6:css');
 
 		return $return;
 	}	
@@ -36,7 +36,7 @@ class plugin_up6_forum extends plugin_up6{
 	//tab标签按钮
 	public function post_attach_btn_extra() {
 		global $_G;
-		include template('up6:tabeditor');
+		include template('up6:editor');
 
 		return $return;
 	}
@@ -45,7 +45,7 @@ class plugin_up6_forum extends plugin_up6{
 	public function post_attach_tab_extra() {
 		global $_G;
 		$editorid = 'e';
-		include template('up6:tabpanel');
+		include template('up6:upload');
 
 		return $return;
 	}
