@@ -2,7 +2,7 @@
 
 /*
 	$ up6 Button  (C) 2010-2016 荆门泽优软件有限公司
-	$ Id: hook.class.php, 2012-04-03
+	$ Id: up6.class.php, 2016-10-11
 */
 
 if(!defined('IN_DISCUZ')) {
@@ -20,52 +20,22 @@ class plugin_up6
 		}
 	
 		$editorid = $GLOBALS['editorid'];
-	
-		//include template('up6:button');
-		//return $html;		
 	}
 	
 	public function global_footer(){
 		global $_G;
-		//if (!$this->appStatus) {
-		//  return false;
-		//}
 		include template('up6:tabcss');
 
 		return $return;
-	}
-	
-//	public function post_bottom_output()
-//	{
-//		print_r("全局页脚嵌入点");
-//		include template('up6:css');
-
-//		return $return;
-//	}
+	}	
 }
 
 /* For Discuz! X1.5, X2, and newer */
 class plugin_up6_forum extends plugin_up6{
-	//function post_bottom_output() {
-	//	return up6();
-	//}
-	
-/*	public function post_image_btn_extra() {
-		global $_G;
-		//if (!$this->appStatus) {
-		//	return false;
-		//}
-		include template('up6:editor');
-
-		return $return;
-	}*/
 	
 	//tab标签按钮
 	public function post_attach_btn_extra() {
 		global $_G;
-		//if (!$this->appStatus) {
-		//	return false;
-		//}
 		include template('up6:tabeditor');
 
 		return $return;
@@ -74,9 +44,6 @@ class plugin_up6_forum extends plugin_up6{
 	//tab标签面板
 	public function post_attach_tab_extra() {
 		global $_G;
-		//if (!$this->appStatus) {
-		//	return false;
-		//}
 		$editorid = 'e';
 		include template('up6:tabpanel');
 
