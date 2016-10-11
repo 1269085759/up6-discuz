@@ -2,24 +2,13 @@
 <!--up6上传面板 post_attach_tab_extra-->
 <div class="p_opt" unselectable="on" id="{$editorid}_up6" style="display: none;">
 	<div id="up6_frame" style="height:0px;"></div>
-aaaaaaaaaa
-	<div class="hm bbda" id="{$editorid}_up6_attach">
-		<iframe id="up6iframe" name="up6iframe" frameborder="0" scrolling="no" src="about:blank" width="510px" height="310px"></iframe>
-		<div class="up6_buttondiv">
-			<!--<button id="up6_over" class="pn" value="true" name="editsubmit" onclick="loadiframe(null,'up6iframe',0,1);updateAttachList();this.disabled=true;this.className='pn'" disabled>
-				<span>{lang up6:sava_attachlist}</span>
-			</button>-->
-		</div>
+		<iframe id="up6_iframe" name="up6_iframe" frameborder="0" scrolling="no" src="about:blank" width="510px" height="310px"></iframe>
 	</div>
-
-	<div class="notice uploadinfo">{lang up6:filesize_limit}
-	</div>
+	<div class="notice uploadinfo">{lang up6:filesize_limit}</div>
 </div>
-
-	<div id="up6_div" style="display:none;"><iframe id="up6_iframe" width="450" height="490" frameborder="0"></iframe>aaaaaaaaaaaaaaaaa</div>
 	<script type="text/javascript">
-	_attachEvent($('e_up6'),'click',function(e){/*loadiframe(null,'up6iframe');*/});
-	//_attachEvent($('e_btn_up6').getElementsByTagName('a')[0], 'click',function(e){alert("e_up6");hideConfirm();});
+	_attachEvent($('e_up6_a'),'click',function(e){loadiframe(null,'up6_iframe');});
+	_attachEvent($('e_btn_up6').getElementsByTagName('a')[0], 'click',function(e){hideConfirm();});
 	_attachEvent($('e_btn_attachlist').getElementsByTagName('a')[0], 'click',function(e){showConfirm();});
 	_attachEvent($('e_btn_upload').getElementsByTagName('a')[0], 'click',function(e){showConfirm();});
 	
@@ -42,12 +31,10 @@ aaaaaaaaaa
 
 	function showConfirm() {
 		$('attach_confirms').style.display='';
-		alert("attach_confirms_show");
 	}
 
 	function hideConfirm() {
 		$('attach_confirms').style.display='none';
-		alert("attach_confirms_hide");
 	}
 	
 		var uploaderInited = false;

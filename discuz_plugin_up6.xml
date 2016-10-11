@@ -39,6 +39,7 @@
         <item id="downurl"><![CDATA[下载地址]]></item>
 		<item id="up6_btn"><![CDATA[大附件上传]]></item>
 		<item id="filesize_limit"><![CDATA[文件尺寸: 小于 2GB]]></item>
+		<item id="wait_for_url"><![CDATA[页面加载中，请稍等...]]></item>
       </item>
     </item>
 	<item id="installfile"><![CDATA[install.php]]></item>
