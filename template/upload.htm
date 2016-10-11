@@ -1,13 +1,5 @@
-{block html}
-
-	<style type="text/css">
-		#e_cmd_uploader { background: url('source/plugin/up6/image/flup27.png') no-repeat; !important;}
-		.b2r #e_cmd_uploader { background: url('source/plugin/up6/image/flup16.png') no-repeat; !important;}
-	</style>
-	<link type="text/css" rel="stylesheet" href="source/plugin/up6/js/style.css" />
-	<script type="text/javascript" src="source/plugin/up6/js/tinybox.js"></script>
-	<div id="uploaderDiv" style="display:none;"><iframe id="ifrUploader" width="450" height="490" frameborder="0"></iframe></div>
-	<script type="text/javascript">
+<!--{block return}-->
+<script type="text/javascript">
 		var uploaderInited = false;
 		(function()
 		{
@@ -23,13 +15,13 @@
 			}
 
 			var obj = document.createElement('a');
-			obj.id = 'e_cmd_uploader';
+			obj.id = 'e_btn_up6';
 			obj.title = '{lang up6:title}';
 			obj.href = 'javascript: ;';
 			obj.appendChild(document.createTextNode('{lang up6:text}'));
 			btn.parentNode.appendChild(obj);
 
-			//²å¼şÖ´ĞĞÍê±ÏºóÊÂ¼ş
+			//æ’ä»¶æ‰§è¡Œå®Œæ¯•åäº‹ä»¶
 			window.InsertFile = function(fileName,fileUrl)
 			{
 				if (wysiwyg)
@@ -43,10 +35,10 @@
 			};
 
 			var _discuzcode = window.discuzcode;
-			//µã»÷±à¼­Æ÷ÖĞ²å¼ş°´Å¥ÊÂ¼ş
+			//ç‚¹å‡»ç¼–è¾‘å™¨ä¸­æ’ä»¶æŒ‰é’®äº‹ä»¶
 			window.discuzcode = function(cmd, arg)
 			{
-				if (cmd == 'cmd_uploader')
+				if (cmd == 'btn_up6')
 				{	
 					if(!uploaderInited)
 					{
@@ -54,7 +46,7 @@
 						ifr.src = "source/plugin/up6/template/index.htm";
 						uploaderInited = true;
 					}
-					var div = document.getElementById("uploaderDiv");
+					var div = document.getElementById("up6_div");
 					TINY.box.show(div.innerHTML,0,0,0,0)
 				} else
 				{
@@ -66,4 +58,4 @@
 
 	</script>
 
-{/block}
+<!--{/block}-->
