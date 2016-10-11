@@ -40,24 +40,6 @@
 		var uploaderInited = false;
 		(function()
 		{
-			var btn = $(editorid + '_attach');
-
-			if (!btn || !btn.parentNode)
-			{
-				return;
-			} 
-			else if (btn.parentNode.className != 'b1r')
-			{
-				return;
-			}
-
-			//var obj = document.createElement('a');
-			//obj.id = 'e_cmd_uploader';
-			//obj.title = '{lang up6:title}';
-			//obj.href = 'javascript: ;';
-			//obj.appendChild(document.createTextNode('{lang up6:text}'));
-			//btn.parentNode.appendChild(obj);
-
 			//插件执行完毕后事件
 			window.InsertFile = function(fileName,fileUrl)
 			{
@@ -70,27 +52,6 @@
 					insertText('[url]' + fileUrl + '[/url]',0,0,false);
 				}
 			};
-
-			var _discuzcode = window.discuzcode;
-			//点击编辑器中插件按钮事件
-			window.discuzcode = function(cmd, arg)
-			{
-				if (cmd == 'btn_up6')
-				{	
-					if(!uploaderInited)
-					{
-						var ifr = document.getElementById("up6_iframe");
-						ifr.src = "source/plugin/up6/template/index.htm";
-						uploaderInited = true;
-					}
-					var div = document.getElementById("up6_div");
-					TINY.box.show(div.innerHTML,0,0,0,0)
-				} else
-				{
-					_discuzcode(cmd, arg);
-				}
-			};
-
 		})();
 	
 	function loadiframe(url,iframeid,time,force){
