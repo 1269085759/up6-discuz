@@ -17,7 +17,7 @@
       <item id="version"><![CDATA[1.00]]></item>
       <item id="__modules">
         <item id="0">
-          <item id="name"><![CDATA[hook]]></item>
+          <item id="name"><![CDATA[up6]]></item>
           <item id="menu"><![CDATA[]]></item>
           <item id="url"><![CDATA[]]></item>
           <item id="type"><![CDATA[11]]></item>
@@ -34,9 +34,10 @@
     <item id="language">
       <item id="templatelang">
         <item id="title"><![CDATA[大文件上传插件]]></item>
-        <item id="text"><![CDATA[大文件上传插件]]></item>
+        <item id="text"><![CDATA[大附件上传]]></item>
         <item id="filename"><![CDATA[文件名称]]></item>
         <item id="downurl"><![CDATA[下载地址]]></item>
+		<item id="up6_btn"><![CDATA[大附件上传]]></item>
       </item>
     </item>
 	<item id="installfile"><![CDATA[install.php]]></item>

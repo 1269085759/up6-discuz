@@ -1,12 +1,6 @@
 {block html}
 
-	<style type="text/css">
-		#e_cmd_uploader { background: url('source/plugin/up6/image/flup27.png') no-repeat; !important;}
-		.b2r #e_cmd_uploader { background: url('source/plugin/up6/image/flup16.png') no-repeat; !important;}
-	</style>
-	<link type="text/css" rel="stylesheet" href="source/plugin/up6/js/style.css" />
-	<script type="text/javascript" src="source/plugin/up6/js/tinybox.js"></script>
-	<div id="uploaderDiv" style="display:none;"><iframe id="ifrUploader" width="450" height="490" frameborder="0"></iframe></div>
+	<div id="up6_div" style="display:none;"><iframe id="up6_iframe" width="450" height="490" frameborder="0"></iframe></div>
 	<script type="text/javascript">
 		var uploaderInited = false;
 		(function()
@@ -22,12 +16,12 @@
 				return;
 			}
 
-			var obj = document.createElement('a');
-			obj.id = 'e_cmd_uploader';
-			obj.title = '{lang up6:title}';
-			obj.href = 'javascript: ;';
-			obj.appendChild(document.createTextNode('{lang up6:text}'));
-			btn.parentNode.appendChild(obj);
+			//var obj = document.createElement('a');
+			//obj.id = 'e_cmd_uploader';
+			//obj.title = '{lang up6:title}';
+			//obj.href = 'javascript: ;';
+			//obj.appendChild(document.createTextNode('{lang up6:text}'));
+			//btn.parentNode.appendChild(obj);
 
 			//插件执行完毕后事件
 			window.InsertFile = function(fileName,fileUrl)
@@ -50,11 +44,11 @@
 				{	
 					if(!uploaderInited)
 					{
-						var ifr = document.getElementById("ifrUploader");
+						var ifr = document.getElementById("up6_iframe");
 						ifr.src = "source/plugin/up6/template/index.htm";
 						uploaderInited = true;
 					}
-					var div = document.getElementById("uploaderDiv");
+					var div = document.getElementById("up6_div");
 					TINY.box.show(div.innerHTML,0,0,0,0)
 				} else
 				{
