@@ -30,7 +30,7 @@ class plugin_up6
 		//if (!$this->appStatus) {
 		//  return false;
 		//}
-		include template('up6:css');
+		include template('up6:tabcss');
 
 		return $return;
 	}
@@ -50,7 +50,7 @@ class plugin_up6_forum extends plugin_up6{
 	//	return up6();
 	//}
 	
-	public function post_attach_btn_extra() {
+/*	public function post_image_btn_extra() {
 		global $_G;
 		//if (!$this->appStatus) {
 		//	return false;
@@ -58,6 +58,51 @@ class plugin_up6_forum extends plugin_up6{
 		include template('up6:editor');
 
 		return $return;
+	}*/
+	
+	//tab标签按钮
+	public function post_attach_btn_extra() {
+		global $_G;
+		//if (!$this->appStatus) {
+		//	return false;
+		//}
+		include template('up6:tabeditor');
+
+		return $return;
 	}
+	
+	//tab标签面板
+	public function post_attach_tab_extra() {
+		global $_G;
+		//if (!$this->appStatus) {
+		//	return false;
+		//}
+		$editorid = 'e';
+		include template('up6:tabpanel');
+
+		return $return;
+	}
+	
+	//
+/*	public function viewthread_attach_extra_output() {
+		global $postlist, $_G;
+		$return = array();
+		foreach ($postlist as $pid => $post) {
+			foreach ($post['attachments'] as $aid => $attachment) {
+				if (strpos($attachment['attachment'], 'storage:') !== false) {
+					$sha1 = substr($attachment['attachment'], -40);
+					$return[$aid] = $this->_output($aid, $sha1, $attachment['filename']);
+					if (in_array($aid, $_G['forum_attachtags'][$pid])) {
+						$postlist[$pid]['message'] .= $this->_jsOutput($aid, $return[$aid]);
+						unset($return[$aid]);
+					}
+					if ($attachment['isimage']) {
+						unset($return[$aid]);
+					}
+				}
+			}
+		}
+		return $return;
+	}*/
 }
 ?>

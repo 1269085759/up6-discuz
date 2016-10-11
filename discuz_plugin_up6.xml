@@ -38,6 +38,7 @@
         <item id="filename"><![CDATA[文件名称]]></item>
         <item id="downurl"><![CDATA[下载地址]]></item>
 		<item id="up6_btn"><![CDATA[大附件上传]]></item>
+		<item id="filesize_limit"><![CDATA[文件尺寸: 小于 2GB]]></item>
       </item>
     </item>
 	<item id="installfile"><![CDATA[install.php]]></item>
