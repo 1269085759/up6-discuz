@@ -84,18 +84,19 @@ function HttpUploaderMgr()
 		, "InitDir"			: ""//初始化路径。示例：D:\\Soft
 		, "AppPath"			: ""//网站虚拟目录名称。子文件夹 web
 		, "SiteUrl"			: window.parent.SITEURL//Disucz全局变量
+		, "PluginUrl"		: window.parent.SITEURL + "source/plugin/up6/"//Disucz全局变量
         , "Cookie"			: ""//服务器cookie
         , "QueueCount"      : 1//同时上传的任务数
 		//文件夹操作相关
-		, "UrlFdCreate"		: "source/plugin/up6/db/fd_create.php"
-		, "UrlFdComplete"	: "source/plugin/up6/db/fd_complete.php"
-		, "UrlFdDel"	    : "source/plugin/up6/db/fd_del.php"
+		, "UrlFdCreate"		: window.parent.SITEURL + "source/plugin/up6/db/fd_create.php"
+		, "UrlFdComplete"	: window.parent.SITEURL + "source/plugin/up6/db/fd_complete.php"
+		, "UrlFdDel"	    : window.parent.SITEURL + "source/plugin/up6/db/fd_del.php"
 		//文件操作相关
-		, "UrlCreate"		: "source/plugin/up6/db/f_create.php"
-		, "UrlPost"			: "source/plugin/up6/db/f_post.php"
-		, "UrlComplete"		: "source/plugin/up6/db/f_complete.php"
-		, "UrlList"			: "source/plugin/up6/db/f_list.php"
-		, "UrlDel"			: "source/plugin/up6/db/f_del.php"
+		, "UrlCreate"		: window.parent.SITEURL + "source/plugin/up6/db/f_create.php"
+		, "UrlPost"			: window.parent.SITEURL + "source/plugin/up6/db/f_post.php"
+		, "UrlComplete"		: window.parent.SITEURL + "source/plugin/up6/db/f_complete.php"
+		, "UrlList"			: window.parent.SITEURL + "source/plugin/up6/db/f_list.php"
+		, "UrlDel"			: window.parent.SITEURL + "source/plugin/up6/db/f_del.php"
 	    //x86
         , ie: {
               drop: { clsid: "0868BADD-C17E-4819-81DE-1D60E5E734A6", name: "Xproer.HttpDroper6" }
@@ -383,7 +384,7 @@ function HttpUploaderMgr()
 		
 		//上传列表项模板
 		acx += '<div class="file-item" id="tmpFile" name="fileItem">\
-                    <div class="img-box"><img src="js/file.png"/></div>\
+                    <div class="img-box"><img src="plugin_url/js/file.png"/></div>\
 					<div class="area-l">\
 						<div class="file-head">\
 						    <div name="fileName" class="name">HttpUploader程序开发.pdf</div>\
@@ -394,15 +395,15 @@ function HttpUploaderMgr()
 						<div name="msg" class="msg top-space">15.3MB 20KB/S 10:02:00</div>\
 					</div>\
 					<div class="area-r">\
-                        <a class="btn-box" name="cancel" title="取消"><img src="js/stop.png"/><div>取消</div></a>\
-                        <a class="btn-box hide" name="post" title="继续"><img src="js/post.png"/><div>继续</div></a>\
-						<a class="btn-box hide" name="stop" title="停止"><img src="js/stop.png"/><div>停止</div></a>\
-						<a class="btn-box hide" name="del" title="删除"><img src="js/del.png"/><div>删除</div></a>\
+                        <a class="btn-box" name="cancel" title="取消"><img src="plugin_url/js/stop.png"/><div>取消</div></a>\
+                        <a class="btn-box hide" name="post" title="继续"><img src="plugin_url/js/post.png"/><div>继续</div></a>\
+						<a class="btn-box hide" name="stop" title="停止"><img src="plugin_url/js/stop.png"/><div>停止</div></a>\
+						<a class="btn-box hide" name="del" title="删除"><img src="plugin_url/js/del.png"/><div>删除</div></a>\
 					</div>';
 		acx += '</div>';
 		//文件夹模板
 		acx += '<div class="file-item" name="folderItem">\
-					<div class="img-box"><img src="js/folder.png"/></div>\
+					<div class="img-box"><img src="plugin_url/js/folder.png"/></div>\
 					<div class="area-l">\
 						<div class="file-head">\
 						    <div name="fileName" class="name">HttpUploader程序开发.pdf</div>\
@@ -413,10 +414,10 @@ function HttpUploaderMgr()
 						<div name="msg" class="msg top-space">15.3MB 20KB/S 10:02:00</div>\
 					</div>\
 					<div class="area-r">\
-                        <a class="btn-box" name="cancel" title="取消"><img src="js/stop.png"/><div>取消</div></a>\
-                        <a class="btn-box hide" name="post" title="继续"><img src="js/post.png"/><div>继续</div></a>\
-						<a class="btn-box hide" name="stop" title="停止"><img src="js/stop.png"/><div>停止</div></a>\
-						<a class="btn-box hide" name="del" title="删除"><img src="js/del.png"/><div>删除</div></a>\
+                        <a class="btn-box" name="cancel" title="取消"><img src="plugin_url/js/stop.png"/><div>取消</div></a>\
+                        <a class="btn-box hide" name="post" title="继续"><img src="plugin_url/js/post.png"/><div>继续</div></a>\
+						<a class="btn-box hide" name="stop" title="停止"><img src="plugin_url/js/stop.png"/><div>停止</div></a>\
+						<a class="btn-box hide" name="del" title="删除"><img src="plugin_url/js/del.png"/><div>删除</div></a>\
 					</div>';
 		acx += '</div>';
 		//分隔线
@@ -436,7 +437,8 @@ function HttpUploaderMgr()
 						<a href="javascript:void(0)" class="btn-footer" name="btnClear">清除已完成文件</a>\
 					</div>\
 				</div>';
-		return acx;
+		var reg = new RegExp("plugin_url/","g");
+		return acx.replace(reg,this.Config.PluginUrl);
 	};
 	
 	//打开上传面板
@@ -736,21 +738,8 @@ function HttpUploaderMgr()
 		});
 	};
 
-	this.initUrl = function ()
-	{
-	    this.Config.UrlFdCreate = this.Config.SiteUrl + this.Config.UrlFdCreate;
-	    this.Config.UrlFdComplete = this.Config.SiteUrl + this.Config.UrlFdComplete;
-	    this.Config.UrlFdDel = this.Config.SiteUrl + this.Config.UrlFdDel;
-	    this.Config.UrlCreate = this.Config.SiteUrl + this.Config.UrlCreate;
-	    this.Config.UrlPost = this.Config.SiteUrl + this.Config.UrlPost;
-	    this.Config.UrlComplete = this.Config.SiteUrl + this.Config.UrlComplete;
-	    this.Config.UrlList = this.Config.SiteUrl + this.Config.UrlList;
-	    this.Config.UrlDel = this.Config.SiteUrl + this.Config.UrlDel;
-	};
-
 	this.loadAuto = function ()
 	{
-	    this.initUrl();
 	    var dom = $(document.body).append(this.GetHtmlContainer());
 	    this.initUI(dom);
 	};
@@ -758,7 +747,6 @@ function HttpUploaderMgr()
 	//加载容器，上传面板，文件列表面板
 	this.load_to = function(oid)
 	{
-	    this.initUrl();
 	    var dom = $("#" + oid).append(this.GetHtmlContainer());
 	    this.initUI(dom);
 	};
