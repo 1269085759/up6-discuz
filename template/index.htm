@@ -13,6 +13,10 @@
     <script language="javascript" type="text/javascript">
 		
 		var cbMgr = new HttpUploaderMgr();
+		cbMgr.event.fileComplete = function(f)
+		{
+			//window.parent.showDialog("文件:"+f.fileSvr.nameLoc+"上传完毕");
+		};
     	//cbMgr.Fields["uid"] = 0;
 
     	$(function(){
