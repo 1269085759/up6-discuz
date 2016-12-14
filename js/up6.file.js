@@ -136,7 +136,7 @@ function FileUploader(fileLoc, mgr)
 		div.appendChild(p);
 		p.appendChild(lb);
 		//lb.appendChild(input);
-		$(lb).append('<input class="pc" name="unused[]" type="checkbox" checked="true" id="unused'+this.aid +'" value="'+this.aid+'"/>')
+		$(lb).append('<input class="pc" name="unused[]" type="checkbox" checked="true" id="unused'+this.fileSvr.aid +'" value="'+this.fileSvr.aid+'"/>')
 		lb.appendChild(span);
 		span.appendChild(txt);
 		

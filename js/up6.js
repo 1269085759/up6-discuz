@@ -248,7 +248,7 @@ function HttpUploaderMgr()
                     ref.RemoveFile(fileSvr);
                 }).find("a[name='insert']").click(function(){//dz:添加到编辑器
 						var down_url = _this.Config.SiteUrl + "source/plugin/up6/db/FileDown.php?fid=" + idSvr;
-						window.parent.InsertFile(fileSvr.nameLoc,url);
+						window.parent.InsertFile(fileSvr.nameLoc,down_url);
 					});
             }
             else

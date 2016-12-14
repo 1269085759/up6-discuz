@@ -87,6 +87,8 @@ class xdb_files
 	var $filesCount=0;
 	//已经完成的文件数
 	var $filesComplete=0;
+	//与discuz附件表相关联的值
+	var $aid=0;
 	
 	function __construct()
 	{		

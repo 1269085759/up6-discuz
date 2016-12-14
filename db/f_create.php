@@ -20,6 +20,7 @@ require('xdb_files.php');
 require('FileResumer.php');
 require('FolderInf.php');
 require('PathTool.php');
+require('dz_attachment_db.php');
 require('biz/PathBuilder.php');
 require('biz/PathMd5Builder.php');
 
@@ -53,6 +54,7 @@ $fileSvr->sizeLoc = $sizeLoc;
 $fileSvr->deleted = false;
 $fileSvr->md5 = $md5;
 $fileSvr->uid = intval($uid);
+$fileSvr->aid = InsertToAttachmentDB($uid);//添加到discuz附件表
 
 //生成路径
 $pb = new PathMd5Builder();
@@ -79,6 +81,9 @@ else
 	$fr = new FileResumer();
 	$fr->CreateFile($fileSvr->pathSvr,$fileSvr->lenLoc);
 }
+$fileArr = array("nameLoc"=>$fileSvr->nameLoc,"lenLoc"=>$fileSvr->lenLoc,"pathRel"=>$fileSvr->pathRel);
+addToAttachmentDbUnused($uid,$aid,$fileArr);//添加到未使用列表
+
 //fix:防止json_encode将汉字转换成unicode
 $fileSvr->nameLoc = PathTool::urlencode_safe($fileSvr->nameLoc);
 $fileSvr->pathLoc = PathTool::urlencode_safe($fileSvr->pathLoc);
