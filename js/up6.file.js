@@ -146,7 +146,7 @@ function FileUploader(fileLoc, mgr)
 		//
 		if(this.PG('attachlimitnotice')) 
 		{
-			window.parent.ajaxget('forum.php?mod=ajax&action=attachlist&aids=|'+aid+'&fid=' + window.parent.fid+'&inajax=1&ajaxtarget=attachlist', 'attachlimitnotice');
+			window.parent.ajaxget('forum.php?mod=ajax&action=attachlist&aids=|'+aid+'&fid=' + window.parent.fid+'&inajax=1&ajaxtarget=attachlist', 'attachlist');
 		}
 	};
 	
