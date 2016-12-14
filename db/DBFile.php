@@ -398,9 +398,8 @@ class DBFile
 	/// <param name="md5"></param>
 	/// <param name="inf"></param>
 	/// <returns></returns>
-	function exist_file($md5, &$inf/*xdb_files*/)
+	function exist_file($md5)
 	{
-		$ret = false;
 		$sb = "select * from (select ";
 		$sb = $sb . "f_id";
 		$sb = $sb . ",f_uid";
@@ -422,9 +421,9 @@ class DBFile
 		$sb = $sb . " order by f_lenSvr desc";
 		$sb = $sb . " ) tmp limit 1";
 
-		$db = &$this->db;
+		$db = $this->db;
 		
-		$cmd =& $db->prepare_utf8($sb);
+		$cmd = $db->prepare_utf8($sb);
 		
 		$cmd->bindParam(":f_md5", $md5);
 		$row = $db->ExecuteRow($cmd);		
@@ -447,9 +446,9 @@ class DBFile
 			$inf->complete 		= (bool)$row["f_complete"];
 			$inf->PostedTime 	= $row["f_time"];
 			$inf->IsDeleted 	= (bool)$row["f_deleted"];
-			$ret = true;
+			return $inf;
 		}
-		return $ret;
+		return NULL;
 	}
 
 	/// <summary>

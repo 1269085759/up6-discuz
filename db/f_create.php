@@ -62,10 +62,10 @@ $fileSvr->pathSvr = $pb->genFile($uid,$fileSvr->md5,$fileSvr->nameLoc);
 $fileSvr->pathRel = $pb->genRelPath();
 
 $db = new DBFile();
-$fileExist = new xdb_files();
+$fileExist = $db->exist_file($md5);
 
 //数据库存在相同文件
-if ($db->exist_file($md5, $fileExist))
+if ( !empty($fileExist) )
 {
 	$fileSvr->pathSvr = $fileExist->pathSvr;
 	$fileSvr->perSvr = $fileExist->perSvr;
