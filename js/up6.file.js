@@ -136,13 +136,18 @@ function FileUploader(fileLoc, mgr)
 		div.appendChild(p);
 		p.appendChild(lb);
 		//lb.appendChild(input);
-		$(lb).append('<input class="pc" name="unused[]" type="checkbox" checked="true" id="unused'+this.fileSvr.aid +'" value="'+this.fileSvr.aid+'"/>')
+		$(lb).append('<input class="pc" name="unused[]" type="checkbox" checked="true" id="unused'+aid +'" value="'+aid+'"/>')
 		lb.appendChild(span);
 		span.appendChild(txt);
 		
 		//更新父窗口附件相关的信息
 		window.parent.ATTACHNUM['attachunused'] += 1;
 		window.parent.updateattachnum('attach');
+		//
+		if(this.PG('attachlimitnotice')) 
+		{
+			window.parent.ajaxget('forum.php?mod=ajax&action=attachlist&aids=|'+aid+'&fid=' + window.parent.fid+'&inajax=1&ajaxtarget=attachlist', 'attachlimitnotice');
+		}
 	};
 	
     this.post_complete = function (json)
